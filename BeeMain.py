@@ -39,13 +39,8 @@ class PlayerBee:
     def growFlowers(self, flowers, gatheredFlowers):
         if gatheredFlowers:
             lastGatheredFlower = gatheredFlowers[-1]
+
             
-            for flower in flowers:
-                if (self.distance(self.x, self.y, flower.x, flower.y) < 30 and
-                    not flower.pollinator and not flower.isGathered):
-                    lastGatheredFlower.grow()
-                    return True
-        return False
 
     
     def playerOnStep(self, mouseX, mouseY, speed=8, flowers=[], gatheredFlowers=[]):
@@ -78,8 +73,8 @@ class Flowers:
             drawCircle(self.x, self.y, self.size2, fill=self.color)
     
     def grow(self):
-        self.size += 5
-        self.size2 += 5
+        self.size += 0.5
+        self.size2 += 0.5
 
 
 def onAppStart(app):
