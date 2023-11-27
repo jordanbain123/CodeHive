@@ -40,6 +40,19 @@ class PlayerBee:
         if gatheredFlowers:
             lastGatheredFlower = gatheredFlowers[-1]
 
+            for flower in flowers:
+                if (self.distance(self.x, self.y, flower.x, flower.y) < 30 and
+                    not flower.pollinator and not flower.isGathered):
+                    lastGatheredFlower.grow()
+                    flower.grow()
+
+                    maxSize = 35
+                    if lastGatheredFlower.size >= maxSize:
+                        gatheredFlowers.pop()
+
+                        
+
+
             
 
     
@@ -61,7 +74,7 @@ class Flowers:
     
     def drawFlower(self, gathered=False, gatheredX=0):
         if gathered:
-            drawCircle(gatheredX, 30, self.size, fill = None, border = self.color,
+            drawCircle(gatheredX, 40, self.size, fill = None, border = self.color,
                        borderWidth = 10)
         elif self.pollinator and not self.isGathered:
             drawCircle(self.x, self.y, self.size, fill = self.color)
@@ -81,15 +94,15 @@ def onAppStart(app):
     app.playerBee = PlayerBee(app.width/2 - 30, app.height/2 - 30.)
 
     app.flowers = [Flowers(100, 100, color='purple', pollinator=True),
-                   Flowers(200, 200, color='pink', pollinator=False),
+                   Flowers(200, 200, color='purple', pollinator=False),
                    Flowers(100, 384, color='purple', pollinator=True),
                    Flowers(250, 200, color='purple', pollinator=True),
                    Flowers(150, 100, color='purple', pollinator=True),
                    Flowers(175, 300, color='purple', pollinator=True),
                    Flowers(374, 400, color='purple', pollinator=True),
-                   Flowers(397, 190, color='pink', pollinator=False),
-                   Flowers(483, 368, color='pink', pollinator=False),
-                   Flowers(182, 394, color='pink', pollinator=False)
+                   Flowers(397, 190, color='purple', pollinator=False),
+                   Flowers(483, 368, color='purple', pollinator=False),
+                   Flowers(182, 394, color='purple', pollinator=False)
                    ]
     
     app.gatheredFlowers = []
